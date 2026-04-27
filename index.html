@@ -9,11 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body class="bg-enterprise-darker min-h-screen flex flex-col relative overflow-x-hidden">
-    <!-- Ambient Background Effects -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full overflow-hidden -z-10 pointer-events-none">
-      <div class="absolute -top-[20%] left-[20%] w-96 h-96 bg-primary-indigo/20 rounded-full blur-[128px]"></div>
-      <div class="absolute top-[40%] right-[10%] w-80 h-80 bg-accent-emerald/10 rounded-full blur-[100px]"></div>
-    </div>
+    <div class="absolute inset-0 -z-10 surface-grid opacity-40 pointer-events-none"></div>
 
     <!-- Header -->
     <header class="w-full border-b border-white/5 backdrop-blur-md sticky top-0 z-50">
@@ -24,39 +20,53 @@
           </svg>
           <span class="text-xl font-bold tracking-tight text-white">Pontis</span>
         </div>
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="#features" class="hover:text-white transition-colors">Features</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+          <a href="#why" class="hover:text-white transition-colors">Why Pontis</a>
+          <a href="#features" class="hover:text-white transition-colors">Platform</a>
           <a href="#architecture" class="hover:text-white transition-colors">Architecture</a>
-          <a href="#about" class="hover:text-white transition-colors">About</a>
+          <a href="#about" class="hover:text-white transition-colors">Founder</a>
         </nav>
-        <button class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all">
-          Request Access
-        </button>
+        <a href="./demo/" class="enterprise-button-primary px-4 py-2">
+          Interactive Demo
+        </a>
       </div>
     </header>
 
     <main class="flex-grow">
       <!-- Hero Section -->
-      <section class="relative pt-24 pb-32 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section class="relative px-6 pb-20 pt-20 md:pb-28 md:pt-24">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
           <div class="space-y-8">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary-indigo/30 bg-primary-indigo/10 text-primary-indigo-light text-sm font-medium">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-primary-indigo/30 bg-primary-indigo/10 text-primary-indigo-light text-sm font-semibold">
               <span class="relative flex h-2 w-2">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-emerald-light opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-emerald-light"></span>
               </span>
-              Enterprise Beta Available
+              Secure browser automation for the un-API'd enterprise
             </div>
-            <h1 class="text-5xl md:text-6xl font-extrabold leading-[1.1]">
-              The Secure Bridge for <br/>
-              <span class="gradient-text">AI Employees.</span>
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-[1.05]">
+              Automate the work trapped behind enterprise web UIs.
             </h1>
-            <p class="text-lg md:text-xl text-slate-400 leading-relaxed max-w-xl">
-              Automate manual SOPs and complex web workflows with local data security and self-healing AI agents.
+            <p class="text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl">
+              Pontis turns fragile SOPs into governed AI employees that run inside the user's authenticated desktop session. No cloud screen scraping. No session token exfiltration. No weeks of RPA rework when a button moves.
             </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
+              <div class="rounded-lg border border-white/[0.08] bg-white/[0.035] p-4">
+                <div class="text-2xl font-bold text-white">0</div>
+                <div class="mt-1 text-xs text-slate-500">browser data leaves endpoint</div>
+              </div>
+              <div class="rounded-lg border border-white/[0.08] bg-white/[0.035] p-4">
+                <div class="text-2xl font-bold text-white">8.2s</div>
+                <div class="mt-1 text-xs text-slate-500">demo heal time</div>
+              </div>
+              <div class="rounded-lg border border-white/[0.08] bg-white/[0.035] p-4">
+                <div class="text-2xl font-bold text-white">SOP</div>
+                <div class="mt-1 text-xs text-slate-500">source of truth in markdown</div>
+              </div>
+            </div>
             <div class="flex flex-col sm:flex-row gap-4 pt-4">
               <a href="./demo/" class="bg-primary-indigo hover:bg-primary-indigo-light text-white px-8 py-4 rounded-xl font-semibold transition-all shadow-lg shadow-primary-indigo/25 flex items-center justify-center gap-2">
-                Interactive Demo
+                Watch Interactive Demo
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -67,36 +77,57 @@
             </div>
           </div>
           
-          <div class="relative lg:ml-auto">
-            <!-- Mock Dashboard UI wrapped around Mascot -->
-            <div class="glass-card rounded-2xl p-2 relative w-full max-w-lg mx-auto transform hover:-translate-y-2 transition-transform duration-500">
-              <div class="absolute -top-4 -right-4 w-24 h-24 bg-accent-emerald/20 rounded-full blur-2xl"></div>
-              <div class="bg-enterprise-dark rounded-xl border border-white/5 overflow-hidden shadow-2xl relative">
-                <div class="h-8 border-b border-white/5 flex items-center px-4 gap-2 bg-white/5">
+          <div class="relative lg:ml-auto w-full">
+            <div class="glass-card rounded-xl p-2 relative w-full max-w-xl mx-auto">
+              <div class="bg-enterprise-dark rounded-lg border border-white/5 overflow-hidden shadow-2xl relative">
+                <div class="h-9 border-b border-white/5 flex items-center px-4 gap-2 bg-white/5">
                   <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
                   <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
                   <div class="w-3 h-3 rounded-full bg-accent-emerald-light/50"></div>
+                  <div class="ml-3 text-xs font-mono text-slate-500">pontis://local-node/crm-quarterly-sync</div>
                 </div>
-                <!-- Embedded Image -->
-                <img src="./assets/mascot.png" alt="Pontis AI Employee Mascot" class="w-full h-auto object-cover opacity-90" />
-                
-                <!-- Floating Elements over Image -->
-                <div class="absolute bottom-6 left-6 right-6">
-                  <div class="glass-card rounded-lg p-4 flex items-center justify-between border-accent-emerald/20 border">
-                    <div class="flex items-center gap-3">
-                      <div class="bg-accent-emerald/20 p-2 rounded-md">
-                        <svg class="w-5 h-5 text-accent-emerald-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
+                <div class="grid gap-0 md:grid-cols-[0.9fr_1.1fr]">
+                  <div class="border-r border-white/[0.06] bg-[#0b1019] p-5">
+                    <img src="./assets/mascot.png" alt="Pontis AI Employee Mascot" class="mb-5 w-full rounded-lg border border-white/[0.08] object-cover opacity-90" />
+                    <div class="space-y-3">
+                      <div class="flex items-center justify-between rounded-md border border-accent-emerald/20 bg-accent-emerald/10 px-3 py-2">
+                        <span class="text-xs font-semibold text-accent-emerald-light">Local execution</span>
+                        <span class="h-2 w-2 rounded-full bg-accent-emerald-light"></span>
                       </div>
-                      <div>
-                        <div class="text-sm font-semibold text-white">SOP Executed</div>
-                        <div class="text-xs text-slate-400">Quarterly CRM Sync</div>
+                      <div class="rounded-md border border-white/[0.08] bg-white/[0.035] p-3">
+                        <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Sensitive context</div>
+                        <div class="mt-1 text-sm text-white">CRM session, MFA, account rows</div>
                       </div>
                     </div>
-                    <div class="text-right">
-                      <div class="text-sm font-bold text-accent-emerald-light">100% Secure</div>
-                      <div class="text-xs text-slate-400">Local Execution</div>
+                  </div>
+                  <div class="p-5">
+                    <div class="mb-4 flex items-center justify-between">
+                      <div>
+                        <div class="text-xs font-semibold uppercase tracking-wider text-primary-indigo-light">Live SOP run</div>
+                        <div class="mt-1 text-lg font-bold text-white">Quarterly CRM Sync</div>
+                      </div>
+                      <span class="badge-success">Running</span>
+                    </div>
+                    <div class="space-y-3">
+                      <div class="rounded-md border border-white/[0.08] bg-white/[0.035] p-3">
+                        <div class="flex items-center justify-between text-sm">
+                          <span class="text-slate-300">Navigate inside authenticated CRM</span>
+                          <span class="text-accent-emerald-light">Done</span>
+                        </div>
+                      </div>
+                      <div class="rounded-md border border-white/[0.08] bg-white/[0.035] p-3">
+                        <div class="flex items-center justify-between text-sm">
+                          <span class="text-slate-300">Extract approved account rows</span>
+                          <span class="text-accent-emerald-light">Done</span>
+                        </div>
+                      </div>
+                      <div class="rounded-md border border-red-500/25 bg-red-500/10 p-3">
+                        <div class="flex items-center justify-between text-sm">
+                          <span class="text-slate-100">Selector changed</span>
+                          <span class="text-red-300">Paused</span>
+                        </div>
+                        <div class="mt-2 text-xs text-slate-400">Pontis asks for one human click, rewrites the markdown SOP, and resumes.</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -106,41 +137,91 @@
         </div>
       </section>
 
-      <!-- The Pontis Philosophy Section -->
-      <section id="philosophy" class="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-enterprise-darker to-enterprise-dark">
-        <div class="max-w-4xl mx-auto text-center">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary-indigo/30 bg-primary-indigo/10 text-primary-indigo-light text-sm font-medium mb-8">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            Pontis (n.) /'pɒntɪs/ - Latin for "Bridge"
-          </div>
-          <h2 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-            The New Human Interface for the <br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-emerald-light to-primary-indigo-light">AI-First Web</span>
-          </h2>
-          <p class="text-xl text-slate-400 leading-relaxed mb-12">
-            We believe humans shouldn't have to navigate thousands of disconnected, rigid web UIs. <strong>Pontis is the intelligent interface.</strong> You interact natively with Pontis, and Pontis bridges the gap, translating your intent into secure, automated actions across any web surface.
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left max-w-3xl mx-auto">
-            <div class="glass-card p-8 rounded-2xl border-l-4 border-l-primary-indigo hover:-translate-y-1 transition-transform">
-              <h4 class="text-xl font-bold text-white mb-3">From Screens to Intent</h4>
-              <p class="text-slate-400 text-sm leading-relaxed">Stop clicking buttons and filling forms. Simply tell Pontis what needs to be done, and watch the work execute locally.</p>
+      <!-- Why Pontis Section -->
+      <section id="why" class="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-enterprise-darker to-enterprise-dark">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 items-start">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-primary-indigo/30 bg-primary-indigo/10 text-primary-indigo-light text-sm font-semibold mb-6">
+                Why teams get stuck
+              </div>
+              <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                The highest-value workflows are the hardest to automate.
+              </h2>
+              <p class="text-lg text-slate-400 leading-relaxed">
+                Revenue ops, compliance, finance, support, and healthcare teams still run critical processes through portals that have no API, fragile APIs, or access rules that cannot be delegated to a cloud bot.
+              </p>
             </div>
-            <div class="glass-card p-8 rounded-2xl border-l-4 border-l-accent-emerald hover:-translate-y-1 transition-transform">
-              <h4 class="text-xl font-bold text-white mb-3">The Ultimate Interface</h4>
-              <p class="text-slate-400 text-sm leading-relaxed">An AI-first interface built to seamlessly connect human intelligence with the un-API'd web, securely on your machine.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="glass-card rounded-lg p-6">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md bg-red-500/15 text-red-300">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z" /></svg>
+                </div>
+                <h3 class="text-lg font-bold text-white">RPA breaks on UI drift</h3>
+                <p class="mt-2 text-sm leading-6 text-slate-400">Selector-based bots fail when vendors rename fields, move buttons, or ship redesigns. The maintenance backlog becomes the product.</p>
+              </div>
+              <div class="glass-card rounded-lg p-6">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md bg-amber-500/15 text-amber-300">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                </div>
+                <h3 class="text-lg font-bold text-white">Cloud agents trigger security review</h3>
+                <p class="mt-2 text-sm leading-6 text-slate-400">Screen recordings, cookies, MFA sessions, PII, and regulated records cannot be casually sent to an external automation provider.</p>
+              </div>
+              <div class="glass-card rounded-lg p-6">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md bg-primary-indigo/15 text-primary-indigo-light">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h6m0 0l-3-3m3 3l-3 3M5 7h7M5 11h4M5 15h2" /></svg>
+                </div>
+                <h3 class="text-lg font-bold text-white">APIs rarely cover the real process</h3>
+                <p class="mt-2 text-sm leading-6 text-slate-400">The important steps often live in admin consoles, partner portals, legacy systems, or SaaS screens that were never designed for automation.</p>
+              </div>
+              <div class="glass-card rounded-lg p-6 border-accent-emerald/20">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md bg-accent-emerald/15 text-accent-emerald-light">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <h3 class="text-lg font-bold text-white">Pontis runs where trust already exists</h3>
+                <p class="mt-2 text-sm leading-6 text-slate-400">Agents execute on the endpoint, inside the user's authenticated browser context, with human approval when the workflow becomes sensitive or uncertain.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Buyer Context Section -->
+      <section class="py-20 px-6 border-y border-white/[0.06] bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto">
+          <div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h2 class="text-3xl md:text-4xl font-bold">Built for workflows the business cannot drop.</h2>
+              <p class="mt-3 max-w-2xl text-slate-400">Pontis is strongest where manual work is repetitive, expensive, access-controlled, and too sensitive for generic cloud automation.</p>
+            </div>
+            <a href="./demo/" class="enterprise-button-secondary shrink-0">See the demo path</a>
+          </div>
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+            <div class="stat-card">
+              <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Revenue operations</div>
+              <h3 class="mt-3 text-xl font-bold text-white">CRM hygiene, renewals, partner portals</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-400">Automate recurring account updates and cross-system checks without asking teams to hand over credentials to another cloud service.</p>
+            </div>
+            <div class="stat-card">
+              <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Compliance operations</div>
+              <h3 class="mt-3 text-xl font-bold text-white">Audit evidence and policy workflows</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-400">Run governed SOPs across internal tools while preserving endpoint controls, user approvals, and an auditable markdown source of truth.</p>
+            </div>
+            <div class="stat-card">
+              <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Finance and admin teams</div>
+              <h3 class="mt-3 text-xl font-bold text-white">Vendor checks, invoices, exception queues</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-400">Let agents handle repetitive portal work, then pause cleanly for human judgment on payments, approvals, or ambiguous records.</p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Features Section -->
-      <section id="features" class="py-24 bg-white/[0.02] border-y border-white/5">
+      <section id="features" class="py-24 bg-enterprise-darker">
         <div class="max-w-7xl mx-auto px-6">
           <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Engineered for the Un-API'd Web</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto">Enterprise-grade infrastructure designed specifically to run secure, stateful web automation natively on your own machine.</p>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">A safer operating model for AI employees</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">Pontis combines local execution, readable SOP code, human-in-the-loop correction, and fleet-level learning into one automation loop.</p>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -151,9 +232,9 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h3 class="text-xl font-semibold mb-3 text-white">Private Execution Harness</h3>
+              <h3 class="text-xl font-semibold mb-3 text-white">Private execution harness</h3>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Your data never leaves your environment. Agents run securely on local desktop nodes, ensuring full compliance and eliminating external data leakage.
+                Agents run on managed desktops inside authenticated sessions, keeping browser state, MFA, PII, and regulated records within the customer's environment.
               </p>
             </div>
             
@@ -164,9 +245,9 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 class="text-xl font-semibold mb-3 text-white">SOP-to-Agent Pipeline</h3>
+              <h3 class="text-xl font-semibold mb-3 text-white">SOP-to-agent pipeline</h3>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Instantly convert dense, manual Standard Operating Procedures into autonomous, self-healing agent workflows with our unified compiler.
+                Convert manual operating procedures into versioned markdown skills that agents can execute, explain, review, and update.
               </p>
             </div>
             
@@ -177,9 +258,9 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <h3 class="text-xl font-semibold mb-3 text-white">Human-in-the-loop Correction</h3>
+              <h3 class="text-xl font-semibold mb-3 text-white">Human-in-the-loop healing</h3>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Agents automatically pause for approval on sensitive actions or unexpected UI changes, learning from human intervention to prevent future failures.
+                When UI drift or risk appears, Pontis pauses, watches a human complete the step once, patches the SOP, and syncs the fix to the fleet.
               </p>
             </div>
           </div>
@@ -398,6 +479,29 @@
                 <div class="text-slate-400 text-sm">Founder, Pontis (ex-Enterprise Tech Lead)</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-6 py-20 border-t border-white/[0.06] bg-[#0b1019]">
+        <div class="max-w-5xl mx-auto text-center">
+          <div class="inline-flex items-center gap-2 rounded-md border border-accent-emerald/20 bg-accent-emerald/10 px-3 py-1 text-sm font-semibold text-accent-emerald-light">
+            See the local loop in action
+          </div>
+          <h2 class="mt-6 text-4xl font-bold leading-tight text-white md:text-5xl">
+            Watch an agent fail safely, learn from a human, and heal the SOP.
+          </h2>
+          <p class="mx-auto mt-5 max-w-2xl text-lg leading-7 text-slate-400">
+            The demo walks through the management console and the local execution node so buyers can understand the security model, the operator experience, and the self-healing loop in one pass.
+          </p>
+          <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <a href="./demo/" class="enterprise-button-primary px-8 py-4">
+              Open Interactive Demo
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <a href="#architecture" class="enterprise-button-secondary px-8 py-4">Review architecture</a>
           </div>
         </div>
       </section>
