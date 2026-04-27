@@ -5,19 +5,203 @@
 @layer base {
   body {
     @apply bg-enterprise-darker text-slate-300 font-sans antialiased;
+    letter-spacing: 0;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold tracking-tight text-white;
     font-family: 'Sora', system-ui, sans-serif;
   }
+
+  ::selection {
+    @apply bg-primary-indigo/40 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.15);
+  }
+}
+
+@layer components {
+  /* Glass Card — primary surface */
+  .glass-card {
+    @apply bg-enterprise-card/95 border border-white/[0.08] shadow-lg;
+  }
+
+  /* Stat Card — KPI/metric tiles */
+  .stat-card {
+    @apply bg-enterprise-card/95 border border-white/[0.08] rounded-lg p-6;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.03) inset,
+      0 1px 2px rgba(0,0,0,0.3),
+      0 8px 24px rgba(0,0,0,0.2);
+  }
+  .stat-card:hover {
+    @apply border-white/10;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.05) inset,
+      0 4px 16px rgba(0,0,0,0.3),
+      0 16px 48px rgba(0,0,0,0.25);
+  }
+
+  /* Panel — IDE sidebar / panel surfaces */
+  .panel {
+    @apply bg-[#111827] border-[#263244];
+  }
+  .panel-header {
+    @apply h-10 flex items-center px-4 border-b border-[#263244] bg-[#151b26] text-xs font-semibold text-slate-300;
+  }
+
+  /* Badge */
+  .badge {
+    @apply text-[11px] px-2.5 py-1 rounded-md font-semibold tracking-wide;
+  }
+  .badge-success {
+    @apply badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/20;
+  }
+  .badge-danger {
+    @apply badge bg-red-500/15 text-red-400 border border-red-500/20;
+  }
+  .badge-info {
+    @apply badge bg-blue-500/15 text-blue-400 border border-blue-500/20;
+  }
+  .badge-neutral {
+    @apply badge bg-white/[0.06] text-slate-400 border border-white/[0.06];
+  }
+  .badge-warning {
+    @apply badge bg-amber-500/15 text-amber-400 border border-amber-500/20;
+  }
+
+  /* Table */
+  .data-table {
+    @apply w-full text-left text-sm;
+  }
+  .data-table thead {
+    @apply text-xs text-slate-500 uppercase tracking-wider;
+  }
+  .data-table thead th {
+    @apply px-6 py-3.5 font-medium border-b border-white/5;
+  }
+  .data-table tbody tr {
+    @apply border-b border-white/[0.03] transition-colors;
+  }
+  .data-table tbody tr:hover {
+    @apply bg-white/[0.02];
+  }
+  .data-table tbody td {
+    @apply px-6 py-4;
+  }
+
+  /* Nav Button */
+  .nav-link {
+    @apply w-full flex items-center px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white hover:bg-white/[0.06];
+  }
+  .nav-link.active {
+    @apply bg-primary-indigo/15 text-white shadow-sm border border-primary-indigo/20;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    @apply w-full bg-white/[0.04] rounded-full h-2.5 overflow-hidden;
+  }
+  .progress-bar > div {
+    @apply h-full rounded-full transition-all duration-1000;
+  }
+
+  /* Builder step node */
+  .builder-step {
+    @apply bg-white/[0.035] p-5 rounded-lg border border-white/[0.07] flex items-center gap-4 transition-all duration-200 hover:bg-white/[0.06] hover:border-white/10;
+  }
+  .builder-step.active {
+    @apply border-primary-indigo/40 bg-primary-indigo/[0.06] shadow-[0_0_20px_rgba(79,70,229,0.08)];
+  }
+  .step-number {
+    @apply w-9 h-9 rounded-md flex items-center justify-center text-sm font-bold shrink-0;
+  }
+
+  /* Flowchart node */
+  .flow-node {
+    @apply bg-enterprise-card p-5 rounded-lg border-2 text-center shadow-lg transition-all duration-300;
+  }
+  .flow-node:hover {
+    @apply -translate-y-1;
+  }
+
+  /* Chart bar */
+  .chart-bar {
+    @apply w-full rounded-t-md relative group cursor-pointer;
+  }
+  .chart-bar-fill {
+    @apply absolute bottom-0 w-full rounded-t-md transition-all duration-700;
+  }
+  .chart-bar-fill:hover {
+    filter: brightness(1.2);
+  }
 }
 
 @layer utilities {
-  .glass-card {
-    @apply bg-enterprise-card/50 backdrop-blur-md border border-white/10 shadow-xl;
-  }
   .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-indigo-light to-accent-emerald-light;
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-indigo-light via-sky-300 to-accent-emerald-light;
+  }
+
+  .demo-page {
+    background:
+      linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(8, 11, 18, 1) 36%),
+      #080b12;
+  }
+
+  .surface-grid {
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .enterprise-button {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold transition-colors;
+  }
+
+  .enterprise-button-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold transition-colors bg-primary-indigo text-white hover:bg-primary-indigo-light shadow-lg shadow-primary-indigo/20;
+  }
+
+  .enterprise-button-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold transition-colors border border-white/[0.1] bg-white/[0.04] text-slate-200 hover:bg-white/[0.08];
+  }
+
+  /* Subtle glow effects */
+  .glow-indigo {
+    box-shadow: 0 0 40px rgba(79,70,229,0.15), 0 0 80px rgba(79,70,229,0.05);
+  }
+  .glow-emerald {
+    box-shadow: 0 0 40px rgba(16,185,129,0.15), 0 0 80px rgba(16,185,129,0.05);
+  }
+  .glow-red {
+    box-shadow: 0 0 40px rgba(239,68,68,0.15), 0 0 80px rgba(239,68,68,0.05);
+  }
+
+  /* Noise texture overlay */
+  .noise {
+    position: relative;
+  }
+  .noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
   }
 }

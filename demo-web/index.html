@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pontis Web Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body class="demo-page min-h-screen flex font-sans text-slate-300 overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[#0a0e17] border-r border-white/[0.08] flex flex-col shrink-0 relative z-20">
+      <div class="h-16 flex items-center px-5 border-b border-white/[0.08] gap-3">
+        <div class="w-8 h-8 rounded-md bg-primary-indigo/15 border border-primary-indigo/30 flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <div class="font-bold text-white text-sm tracking-tight">Pontis Console</div>
+          <div class="text-[10px] text-slate-500">Production Demo Tenant</div>
+        </div>
+      </div>
+
+      <nav class="flex-grow py-4 px-3 space-y-1">
+        <div class="text-[10px] font-semibold text-slate-600 uppercase tracking-widest mb-3 px-3">Platform</div>
+
+        <button data-tab="monitoring" class="nav-link active nav-btn">
+          <svg class="w-[18px] h-[18px] mr-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+          Monitoring
+        </button>
+
+        <button data-tab="builder" class="nav-link nav-btn">
+          <svg class="w-[18px] h-[18px] mr-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+          Agent Builder
+        </button>
+
+        <button data-tab="workflow" class="nav-link nav-btn">
+          <svg class="w-[18px] h-[18px] mr-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
+          Workflows
+        </button>
+
+        <button data-tab="metrics" class="nav-link nav-btn">
+          <svg class="w-[18px] h-[18px] mr-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" /></svg>
+          Metrics & Evals
+        </button>
+      </nav>
+
+      <div class="p-3 border-t border-white/[0.08]">
+        <a href="../demo/" class="nav-link text-xs text-slate-500">
+          <svg class="w-4 h-4 mr-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+          Back to Hub
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-grow flex flex-col relative overflow-hidden">
+      <!-- Top Bar -->
+      <header class="h-16 border-b border-white/[0.08] flex items-center px-8 justify-between relative z-10 bg-enterprise-darker/90">
+        <div>
+          <h1 id="page-title" class="text-lg font-bold text-white tracking-tight">Monitoring</h1>
+          <p id="page-subtitle" class="text-xs text-slate-500">Live fleet posture, SOP health, and intervention queue</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="badge-success flex items-center gap-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+            All Systems Operational
+          </div>
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary-indigo to-accent-emerald flex items-center justify-center text-white text-xs font-bold shadow-md">SL</div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="flex-grow p-8 overflow-y-auto relative z-10">
+
+        <!-- MONITORING -->
+        <div id="tab-monitoring" class="tab-content space-y-8">
+          <div class="rounded-lg border border-white/[0.08] bg-[#101722] p-5">
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider text-primary-indigo-light">Executive Snapshot</div>
+                <h2 class="mt-1 text-2xl font-bold text-white">Local agents are running safely across regulated workflows.</h2>
+                <p class="mt-2 max-w-3xl text-sm leading-6 text-slate-400">Three tasks need human approval. No session tokens, PII, or browser state have left managed endpoints.</p>
+              </div>
+              <button class="enterprise-button-primary shrink-0">
+                Review interventions
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              </button>
+            </div>
+          </div>
+          <!-- KPI Row -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+            <div class="stat-card">
+              <div class="text-xs text-slate-500 mb-1 uppercase tracking-wider">Active Nodes</div>
+              <div class="text-3xl font-bold text-white tracking-tight">1,204</div>
+              <div class="text-xs text-emerald-400 mt-2 flex items-center gap-1">
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+                +12% this week
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="text-xs text-slate-500 mb-1 uppercase tracking-wider">Tasks Running</div>
+              <div class="text-3xl font-bold text-primary-indigo-light tracking-tight">8,492</div>
+              <div class="text-xs text-slate-500 mt-2">across 14 SOPs</div>
+            </div>
+            <div class="stat-card">
+              <div class="text-xs text-slate-500 mb-1 uppercase tracking-wider">Avg Heal Time</div>
+              <div class="text-3xl font-bold text-accent-emerald-light tracking-tight">8.2s</div>
+              <div class="text-xs text-emerald-400 mt-2 flex items-center gap-1">
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+                -3.1s vs last month
+              </div>
+            </div>
+            <div class="stat-card border-red-500/10 glow-red">
+              <div class="text-xs text-red-400 mb-1 uppercase tracking-wider flex items-center gap-2">
+                Interventions
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+              </div>
+              <div class="text-3xl font-bold text-white tracking-tight">3</div>
+              <div class="text-xs text-red-400 mt-2">Require human action</div>
+            </div>
+          </div>
+
+          <!-- Live Table -->
+          <div>
+            <h3 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Live Agent Activity</h3>
+            <div class="stat-card !p-0 overflow-hidden rounded-lg">
+              <table class="data-table">
+                <thead>
+                  <tr><th>Node</th><th>SOP</th><th>Status</th><th>Region</th><th class="text-right">Elapsed</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="font-mono text-xs text-slate-300">us-east-n102</td>
+                    <td>crm_quarterly_sync.md</td>
+                    <td><span class="badge-success">Running</span></td>
+                    <td class="text-slate-500">US East</td>
+                    <td class="text-right font-mono text-xs">00:14s</td>
+                  </tr>
+                  <tr>
+                    <td class="font-mono text-xs text-slate-300">eu-west-n404</td>
+                    <td>invoice_scraper_v2.md</td>
+                    <td><span class="badge-success">Running</span></td>
+                    <td class="text-slate-500">EU West</td>
+                    <td class="text-right font-mono text-xs">01:42s</td>
+                  </tr>
+                  <tr class="!bg-red-500/[0.04]">
+                    <td class="font-mono text-xs text-slate-300">ap-south-n001</td>
+                    <td>hr_onboarding.md</td>
+                    <td><span class="badge-danger animate-pulse">Needs Intervention</span></td>
+                    <td class="text-slate-500">AP South</td>
+                    <td class="text-right font-mono text-xs text-red-400">Paused</td>
+                  </tr>
+                  <tr>
+                    <td class="font-mono text-xs text-slate-300">us-west-n217</td>
+                    <td>vendor_payment_check.md</td>
+                    <td><span class="badge-success">Running</span></td>
+                    <td class="text-slate-500">US West</td>
+                    <td class="text-right font-mono text-xs">00:03s</td>
+                  </tr>
+                  <tr>
+                    <td class="font-mono text-xs text-slate-300">eu-cent-n089</td>
+                    <td>compliance_audit_q2.md</td>
+                    <td><span class="badge-neutral">Queued</span></td>
+                    <td class="text-slate-500">EU Central</td>
+                    <td class="text-right font-mono text-xs text-slate-600">—</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- AGENT BUILDER -->
+        <div id="tab-builder" class="tab-content hidden">
+          <div class="flex gap-6 h-[calc(100vh-7.5rem)]">
+            <!-- Visual Builder -->
+            <div class="w-1/2 stat-card !p-0 flex flex-col overflow-hidden rounded-lg">
+              <div class="panel-header justify-between">
+                <span>Visual Agent Builder</span>
+                <span class="badge-info">Editing</span>
+              </div>
+              <div class="flex-grow p-6 space-y-3 overflow-y-auto">
+                <div class="builder-step">
+                  <div class="step-number bg-primary-indigo/20 text-primary-indigo-light">1</div>
+                  <div class="flex-grow">
+                    <div class="text-white font-semibold text-sm mb-0.5">Open authenticated CRM session</div>
+                    <div class="text-slate-500 text-xs font-mono">https://internal.crm.corp/dashboard</div>
+                  </div>
+                  <span class="badge-success text-[10px]">✓</span>
+                </div>
+                <div class="flex justify-center"><div class="w-px h-5 bg-white/10"></div></div>
+
+                <div class="builder-step">
+                  <div class="step-number bg-primary-indigo/20 text-primary-indigo-light">2</div>
+                  <div class="flex-grow">
+                    <div class="text-white font-semibold text-sm mb-0.5">Verify local session and MFA posture</div>
+                    <div class="text-slate-500 text-xs font-mono">#login-form</div>
+                  </div>
+                  <span class="badge-success text-[10px]">✓</span>
+                </div>
+                <div class="flex justify-center"><div class="w-px h-5 bg-white/10"></div></div>
+
+                <div class="builder-step active">
+                  <div class="step-number bg-primary-indigo text-white shadow-md shadow-primary-indigo/30">3</div>
+                  <div class="flex-grow">
+                    <div class="text-white font-semibold text-sm mb-0.5">Extract approved account rows</div>
+                    <div class="text-slate-500 text-xs font-mono">.data-grid > tbody</div>
+                  </div>
+                  <button class="text-xs bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-md text-white transition-colors">Edit</button>
+                </div>
+                <div class="flex justify-center"><div class="w-px h-5 bg-white/10"></div></div>
+
+                <div class="builder-step opacity-50">
+                  <div class="step-number bg-white/[0.06] text-slate-500">4</div>
+                  <div class="flex-grow">
+                    <div class="text-slate-400 font-semibold text-sm mb-0.5">Write audit-safe payload</div>
+                    <div class="text-slate-600 text-xs font-mono">/api/v1/ingest</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Raw Markdown -->
+            <div class="w-1/2 stat-card !p-0 flex flex-col overflow-hidden rounded-lg">
+              <div class="panel-header bg-[#0d1117] justify-between">
+                <span class="font-mono text-xs">crm_data_extraction.md</span>
+                <span class="badge-success text-[10px]">Auto-syncing</span>
+              </div>
+              <div class="flex-grow p-6 bg-[#0d1117] overflow-y-auto" style="font-family:'Fira Code',monospace;">
+                <pre class="text-sm leading-7 text-slate-300"><span class="text-primary-indigo-light font-bold"># CRM Data Extraction SOP</span>
+
+<span class="text-slate-500">## Steps</span>
+
+1. Navigate to `https://internal.crm.corp/dashboard`
+2. Wait for element `#login-form` to appear.
+<span class="bg-primary-indigo/15 text-primary-indigo-light px-2 py-0.5 rounded inline-block">3. Extract all row data from `.data-grid > tbody`</span>
+4. Send JSON payload to `/api/v1/ingest`.</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WORKFLOW BUILDER -->
+        <div id="tab-workflow" class="tab-content hidden">
+          <div class="stat-card !p-0 rounded-lg overflow-hidden h-[calc(100vh-7.5rem)] relative">
+            <!-- Dot Grid Background -->
+            <div class="absolute inset-0 surface-grid opacity-70"></div>
+
+            <div class="panel-header justify-between relative z-10">
+              <span>Workflow Orchestrator</span>
+              <div class="flex gap-2">
+                <span class="badge-info">3 nodes</span>
+                <span class="badge-neutral">Draft</span>
+              </div>
+            </div>
+
+            <div class="flex-grow flex items-center justify-center p-12 relative z-10">
+              <div class="flex items-center gap-0 w-full max-w-4xl">
+
+                <div class="flow-node border-primary-indigo glow-indigo flex-shrink-0 w-52">
+                  <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-primary-indigo/20 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-primary-indigo-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  </div>
+                  <div class="text-white font-bold text-sm mb-1">Data Ingestion</div>
+                  <div class="text-xs text-slate-500 font-mono">ScraperBot</div>
+                </div>
+
+                <div class="flex-grow h-0.5 bg-gradient-to-r from-primary-indigo to-accent-emerald relative min-w-[60px]">
+                  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-accent-emerald rounded-full shadow-md shadow-accent-emerald/50"></div>
+                </div>
+
+                <div class="flow-node border-accent-emerald glow-emerald flex-shrink-0 w-52">
+                  <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-accent-emerald/20 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-accent-emerald-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  </div>
+                  <div class="text-white font-bold text-sm mb-1">Validation</div>
+                  <div class="text-xs text-slate-500 font-mono">LLM_Validator</div>
+                </div>
+
+                <div class="flex-grow h-0.5 bg-white/10 border-dashed border-t border-white/20 relative min-w-[60px]">
+                  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white/30 rounded-full"></div>
+                </div>
+
+                <div class="flow-node border-white/20 border-dashed opacity-60 flex-shrink-0 w-52">
+                  <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-white/[0.06] flex items-center justify-center">
+                    <svg class="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                  </div>
+                  <div class="text-white font-bold text-sm mb-1">ERP Sync</div>
+                  <div class="text-xs text-slate-500 font-mono">NetSuite_Uploader</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- METRICS -->
+        <div id="tab-metrics" class="tab-content hidden space-y-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- Healing Chart -->
+            <div class="stat-card rounded-lg">
+              <h3 class="text-sm font-semibold text-white mb-6 uppercase tracking-wider">Healing Success Rate</h3>
+              <div class="h-52 flex items-end gap-3 px-2">
+                <div class="flex-1 flex flex-col items-center gap-2">
+                  <div class="w-full bg-white/[0.04] rounded-md h-48 relative">
+                    <div class="chart-bar-fill bg-primary-indigo/70 rounded-md" style="height:55%"></div>
+                  </div>
+                  <span class="text-[10px] text-slate-500">Jan</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2">
+                  <div class="w-full bg-white/[0.04] rounded-md h-48 relative">
+                    <div class="chart-bar-fill bg-primary-indigo/70 rounded-md" style="height:62%"></div>
+                  </div>
+                  <span class="text-[10px] text-slate-500">Feb</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2">
+                  <div class="w-full bg-white/[0.04] rounded-md h-48 relative">
+                    <div class="chart-bar-fill bg-primary-indigo rounded-md" style="height:78%"></div>
+                  </div>
+                  <span class="text-[10px] text-slate-500">Mar</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2">
+                  <div class="w-full bg-white/[0.04] rounded-md h-48 relative">
+                    <div class="chart-bar-fill bg-gradient-to-t from-accent-emerald to-accent-emerald-light rounded-md shadow-[0_0_20px_rgba(16,185,129,0.3)]" style="height:96%"></div>
+                  </div>
+                  <span class="text-[10px] text-accent-emerald-light font-bold">Apr</span>
+                </div>
+              </div>
+              <div class="mt-6 text-xs text-slate-500 text-center">
+                Network Healing pushed uptime to <span class="text-white font-bold">98.4%</span>
+              </div>
+            </div>
+
+            <!-- Time Saved -->
+            <div class="stat-card rounded-lg">
+              <h3 class="text-sm font-semibold text-white mb-6 uppercase tracking-wider">Time Saved (Hours)</h3>
+              <div class="space-y-6">
+                <div>
+                  <div class="flex justify-between text-sm mb-2">
+                    <span class="text-slate-400">Data Entry</span>
+                    <span class="font-bold text-white font-mono">12,400</span>
+                  </div>
+                  <div class="progress-bar"><div class="bg-primary-indigo" style="width:85%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-2">
+                    <span class="text-slate-400">Invoice Processing</span>
+                    <span class="font-bold text-white font-mono">8,200</span>
+                  </div>
+                  <div class="progress-bar"><div class="bg-blue-500" style="width:65%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-2">
+                    <span class="text-slate-400">Compliance Audits</span>
+                    <span class="font-bold text-white font-mono">4,150</span>
+                  </div>
+                  <div class="progress-bar"><div class="bg-accent-emerald" style="width:35%"></div></div>
+                </div>
+              </div>
+              <div class="mt-8 pt-6 border-t border-white/5 flex justify-between items-center">
+                <span class="text-xs text-slate-500">Total ROI this quarter</span>
+                <span class="text-2xl font-bold gradient-text">$2.4M</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <script type="module" src="./demo-web.js"></script>
+  </body>
+</html>

@@ -3,17 +3,19 @@ export default {
   content: [
     "./index.html",
     "./demo/**/*.{html,js}",
+    "./demo-app/**/*.{html,js}",
+    "./demo-web/**/*.{html,js}",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        'enterprise-dark': '#0f172a',
-        'enterprise-darker': '#020617',
-        'enterprise-card': '#1e293b',
-        'primary-indigo': '#4f46e5',
-        'primary-indigo-light': '#818cf8',
-        'accent-emerald': '#10b981',
+        'enterprise-dark': '#111827',
+        'enterprise-darker': '#080b12',
+        'enterprise-card': '#151b26',
+        'primary-indigo': '#2563eb',
+        'primary-indigo-light': '#60a5fa',
+        'accent-emerald': '#059669',
         'accent-emerald-light': '#34d399',
       },
       fontFamily: {
