@@ -28,22 +28,22 @@
 
         <button data-tab="monitoring" class="nav-link active nav-btn">
           <svg class="w-[18px] h-[18px] mr-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-          Monitoring
+          Follow-ups
         </button>
 
         <button data-tab="builder" class="nav-link nav-btn">
           <svg class="w-[18px] h-[18px] mr-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-          Agent Builder
+          Assistant Setup
         </button>
 
         <button data-tab="workflow" class="nav-link nav-btn">
           <svg class="w-[18px] h-[18px] mr-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
-          Workflows
+          Message Review
         </button>
 
         <button data-tab="metrics" class="nav-link nav-btn">
           <svg class="w-[18px] h-[18px] mr-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" /></svg>
-          Metrics & Evals
+          Impact
         </button>
       </nav>
 
@@ -60,8 +60,8 @@
       <!-- Top Bar -->
       <header class="h-16 border-b border-white/[0.08] flex items-center px-8 justify-between relative z-10 bg-enterprise-darker/90">
         <div>
-          <h1 id="page-title" class="text-lg font-bold text-white tracking-tight">Monitoring</h1>
-          <p id="page-subtitle" class="text-xs text-slate-500">Live fleet posture, SOP health, and intervention queue</p>
+          <h1 id="page-title" class="text-lg font-bold text-white tracking-tight">Follow-up Command Center</h1>
+          <p id="page-subtitle" class="text-xs text-slate-500">Live follow-up queue, message approvals, and customer next steps</p>
         </div>
         <div class="flex items-center gap-3">
           <div class="badge-success flex items-center gap-2">
@@ -80,12 +80,12 @@
           <div class="rounded-lg border border-white/[0.08] bg-[#101722] p-5">
             <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
-                <div class="text-xs font-semibold uppercase tracking-wider text-primary-indigo-light">Executive Snapshot</div>
-                <h2 class="mt-1 text-2xl font-bold text-white">Local agents are running safely across regulated workflows.</h2>
-                <p class="mt-2 max-w-3xl text-sm leading-6 text-slate-400">Three tasks need human approval. No session tokens, PII, or browser state have left managed endpoints.</p>
+                <div class="text-xs font-semibold uppercase tracking-wider text-primary-indigo-light">Today at a glance</div>
+                <h2 class="mt-1 text-2xl font-bold text-white">Pontis is keeping client conversations warm.</h2>
+                <p class="mt-2 max-w-3xl text-sm leading-6 text-slate-400">Three replies need your approval. New leads, estimate reminders, and service check-ins are already sorted by urgency.</p>
               </div>
-              <button class="enterprise-button-primary shrink-0">
-                Review interventions
+              <button id="review-followups" class="enterprise-button-primary shrink-0">
+                Review messages
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </button>
             </div>
@@ -93,79 +93,79 @@
           <!-- KPI Row -->
           <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
             <div class="stat-card">
-              <div class="text-xs text-slate-500 mb-1 uppercase tracking-wider">Active Nodes</div>
-              <div class="text-3xl font-bold text-white tracking-tight">1,204</div>
+              <div class="text-xs text-slate-500 mb-1 uppercase tracking-wider">Open Contacts</div>
+              <div class="text-3xl font-bold text-white tracking-tight">128</div>
               <div class="text-xs text-emerald-400 mt-2 flex items-center gap-1">
                 <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
-                +12% this week
+                +18 this week
               </div>
             </div>
             <div class="stat-card">
-              <div class="text-xs text-slate-500 mb-1 uppercase tracking-wider">Tasks Running</div>
-              <div class="text-3xl font-bold text-primary-indigo-light tracking-tight">8,492</div>
-              <div class="text-xs text-slate-500 mt-2">across 14 SOPs</div>
+              <div class="text-xs text-slate-500 mb-1 uppercase tracking-wider">Drafts Ready</div>
+              <div class="text-3xl font-bold text-primary-indigo-light tracking-tight">37</div>
+              <div class="text-xs text-slate-500 mt-2">texts, emails, and reminders</div>
             </div>
             <div class="stat-card">
-              <div class="text-xs text-slate-500 mb-1 uppercase tracking-wider">Avg Heal Time</div>
-              <div class="text-3xl font-bold text-accent-emerald-light tracking-tight">8.2s</div>
+              <div class="text-xs text-slate-500 mb-1 uppercase tracking-wider">Avg Reply Time</div>
+              <div class="text-3xl font-bold text-accent-emerald-light tracking-tight">11m</div>
               <div class="text-xs text-emerald-400 mt-2 flex items-center gap-1">
                 <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
-                -3.1s vs last month
+                -42% vs last month
               </div>
             </div>
             <div class="stat-card border-red-500/10 glow-red">
               <div class="text-xs text-red-400 mb-1 uppercase tracking-wider flex items-center gap-2">
-                Interventions
+                Needs Approval
                 <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
               </div>
               <div class="text-3xl font-bold text-white tracking-tight">3</div>
-              <div class="text-xs text-red-400 mt-2">Require human action</div>
+              <div class="text-xs text-red-400 mt-2">Sensitive messages paused</div>
             </div>
           </div>
 
           <!-- Live Table -->
           <div>
-            <h3 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Live Agent Activity</h3>
+            <h3 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Live Follow-up Activity</h3>
             <div class="stat-card !p-0 overflow-hidden rounded-lg">
               <table class="data-table">
                 <thead>
-                  <tr><th>Node</th><th>SOP</th><th>Status</th><th>Region</th><th class="text-right">Elapsed</th></tr>
+                  <tr><th>Client</th><th>Next Step</th><th>Status</th><th>Owner</th><th class="text-right">Due</th></tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="font-mono text-xs text-slate-300">us-east-n102</td>
-                    <td>crm_quarterly_sync.md</td>
-                    <td><span class="badge-success">Running</span></td>
-                    <td class="text-slate-500">US East</td>
-                    <td class="text-right font-mono text-xs">00:14s</td>
+                    <td class="font-semibold text-slate-200">Northstar Dental</td>
+                    <td>Send estimate reminder</td>
+                    <td><span class="badge-success">Ready to send</span></td>
+                    <td class="text-slate-500">Sales</td>
+                    <td class="text-right text-xs text-accent-emerald-light">Now</td>
                   </tr>
                   <tr>
-                    <td class="font-mono text-xs text-slate-300">eu-west-n404</td>
-                    <td>invoice_scraper_v2.md</td>
-                    <td><span class="badge-success">Running</span></td>
-                    <td class="text-slate-500">EU West</td>
-                    <td class="text-right font-mono text-xs">01:42s</td>
+                    <td class="font-semibold text-slate-200">Maya Patel</td>
+                    <td>Follow up after voicemail</td>
+                    <td><span class="badge-success">Drafted</span></td>
+                    <td class="text-slate-500">Owner</td>
+                    <td class="text-right text-xs">1:15 PM</td>
                   </tr>
                   <tr class="!bg-red-500/[0.04]">
-                    <td class="font-mono text-xs text-slate-300">ap-south-n001</td>
-                    <td>hr_onboarding.md</td>
-                    <td><span class="badge-danger animate-pulse">Needs Intervention</span></td>
-                    <td class="text-slate-500">AP South</td>
-                    <td class="text-right font-mono text-xs text-red-400">Paused</td>
+                    <td class="font-semibold text-slate-200">Riverbend Cafe</td>
+                    <td>Discount exception</td>
+                    <td><span class="badge-danger animate-pulse">Approval needed</span></td>
+                    <td class="text-slate-500">Manager</td>
+                    <td class="text-right text-xs text-red-400">Paused</td>
                   </tr>
                   <tr>
-                    <td class="font-mono text-xs text-slate-300">us-west-n217</td>
-                    <td>vendor_payment_check.md</td>
-                    <td><span class="badge-success">Running</span></td>
-                    <td class="text-slate-500">US West</td>
-                    <td class="text-right font-mono text-xs">00:03s</td>
+                    <td class="font-semibold text-slate-200">June Kim</td>
+                    <td>Appointment nudge</td>
+                    <td><span class="badge-success">Scheduled</span></td>
+                    <td class="text-slate-500">Support</td>
+                    <td class="text-right text-xs">3:00 PM</td>
                   </tr>
                   <tr>
-                    <td class="font-mono text-xs text-slate-300">eu-cent-n089</td>
-                    <td>compliance_audit_q2.md</td>
+                    <td class="font-semibold text-slate-200">Atlas Fitness</td>
+                    <td>Renewal check-in</td>
                     <td><span class="badge-neutral">Queued</span></td>
-                    <td class="text-slate-500">EU Central</td>
-                    <td class="text-right font-mono text-xs text-slate-600">—</td>
+                    <td class="text-slate-500">Customer Success</td>
+                    <td class="text-right text-xs text-slate-600">Tomorrow</td>
                   </tr>
                 </tbody>
               </table>
@@ -179,15 +179,15 @@
             <!-- Visual Builder -->
             <div class="w-1/2 stat-card !p-0 flex flex-col overflow-hidden rounded-lg">
               <div class="panel-header justify-between">
-                <span>Visual Agent Builder</span>
+                <span>Follow-up Assistant Builder</span>
                 <span class="badge-info">Editing</span>
               </div>
               <div class="flex-grow p-6 space-y-3 overflow-y-auto">
                 <div class="builder-step">
                   <div class="step-number bg-primary-indigo/20 text-primary-indigo-light">1</div>
                   <div class="flex-grow">
-                    <div class="text-white font-semibold text-sm mb-0.5">Open authenticated CRM session</div>
-                    <div class="text-slate-500 text-xs font-mono">https://internal.crm.corp/dashboard</div>
+                    <div class="text-white font-semibold text-sm mb-0.5">Watch new leads and missed replies</div>
+                    <div class="text-slate-500 text-xs">Inbox, website forms, and CRM notes</div>
                   </div>
                   <span class="badge-success text-[10px]">✓</span>
                 </div>
@@ -196,8 +196,8 @@
                 <div class="builder-step">
                   <div class="step-number bg-primary-indigo/20 text-primary-indigo-light">2</div>
                   <div class="flex-grow">
-                    <div class="text-white font-semibold text-sm mb-0.5">Verify local session and MFA posture</div>
-                    <div class="text-slate-500 text-xs font-mono">#login-form</div>
+                    <div class="text-white font-semibold text-sm mb-0.5">Decide what each person needs next</div>
+                    <div class="text-slate-500 text-xs">Estimate reminder, check-in, booking nudge, or handoff</div>
                   </div>
                   <span class="badge-success text-[10px]">✓</span>
                 </div>
@@ -206,8 +206,8 @@
                 <div class="builder-step active">
                   <div class="step-number bg-primary-indigo text-white shadow-md shadow-primary-indigo/30">3</div>
                   <div class="flex-grow">
-                    <div class="text-white font-semibold text-sm mb-0.5">Extract approved account rows</div>
-                    <div class="text-slate-500 text-xs font-mono">.data-grid > tbody</div>
+                    <div class="text-white font-semibold text-sm mb-0.5">Draft a friendly message in the right voice</div>
+                    <div class="text-slate-500 text-xs">Short, personal, and matched to the customer history</div>
                   </div>
                   <button class="text-xs bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-md text-white transition-colors">Edit</button>
                 </div>
@@ -216,28 +216,37 @@
                 <div class="builder-step opacity-50">
                   <div class="step-number bg-white/[0.06] text-slate-500">4</div>
                   <div class="flex-grow">
-                    <div class="text-slate-400 font-semibold text-sm mb-0.5">Write audit-safe payload</div>
-                    <div class="text-slate-600 text-xs font-mono">/api/v1/ingest</div>
+                    <div class="text-slate-400 font-semibold text-sm mb-0.5">Ask a human before sensitive sends</div>
+                    <div class="text-slate-600 text-xs">Price changes, commitments, refunds, or anything uncertain</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Raw Markdown -->
             <div class="w-1/2 stat-card !p-0 flex flex-col overflow-hidden rounded-lg">
-              <div class="panel-header bg-[#0d1117] justify-between">
-                <span class="font-mono text-xs">crm_data_extraction.md</span>
-                <span class="badge-success text-[10px]">Auto-syncing</span>
+              <div class="panel-header justify-between">
+                <span>Plain-language Instructions</span>
+                <span class="badge-success text-[10px]">Saved</span>
               </div>
-              <div class="flex-grow p-6 bg-[#0d1117] overflow-y-auto" style="font-family:'Fira Code',monospace;">
-                <pre class="text-sm leading-7 text-slate-300"><span class="text-primary-indigo-light font-bold"># CRM Data Extraction SOP</span>
-
-<span class="text-slate-500">## Steps</span>
-
-1. Navigate to `https://internal.crm.corp/dashboard`
-2. Wait for element `#login-form` to appear.
-<span class="bg-primary-indigo/15 text-primary-indigo-light px-2 py-0.5 rounded inline-block">3. Extract all row data from `.data-grid > tbody`</span>
-4. Send JSON payload to `/api/v1/ingest`.</pre>
+              <div class="flex-grow overflow-y-auto bg-[#0d1117] p-6">
+                <div class="space-y-4 text-sm leading-6">
+                  <div class="rounded-md border border-white/[0.08] bg-white/[0.035] p-4">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Goal</div>
+                    <p class="mt-2 text-white">Make sure every promising lead gets a helpful response within the same business day.</p>
+                  </div>
+                  <div class="rounded-md border border-primary-indigo/25 bg-primary-indigo/10 p-4">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-primary-indigo-light">Message style</div>
+                    <p class="mt-2 text-slate-200">Sound warm and specific. Mention the person’s request, offer one clear next step, and keep the message under four sentences.</p>
+                  </div>
+                  <div class="rounded-md border border-white/[0.08] bg-white/[0.035] p-4">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">When to pause</div>
+                    <p class="mt-2 text-slate-300">Ask a human before sending prices, promises, refunds, discounts, or anything that could surprise the customer.</p>
+                  </div>
+                  <div class="rounded-md border border-accent-emerald/25 bg-accent-emerald/10 p-4">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-accent-emerald-light">After sending</div>
+                    <p class="mt-2 text-slate-200">Update the customer record and create a reminder if they do not reply in two business days.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -250,48 +259,65 @@
             <div class="absolute inset-0 surface-grid opacity-70"></div>
 
             <div class="panel-header justify-between relative z-10">
-              <span>Workflow Orchestrator</span>
+              <span>Message Review Desk</span>
               <div class="flex gap-2">
-                <span class="badge-info">3 nodes</span>
-                <span class="badge-neutral">Draft</span>
+                <span class="badge-info">3 approvals</span>
+                <span class="badge-neutral">Live</span>
               </div>
             </div>
 
-            <div class="flex-grow flex items-center justify-center p-12 relative z-10">
-              <div class="flex items-center gap-0 w-full max-w-4xl">
-
-                <div class="flow-node border-primary-indigo glow-indigo flex-shrink-0 w-52">
-                  <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-primary-indigo/20 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-primary-indigo-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+            <div class="grid h-full grid-cols-[0.95fr_1.05fr] gap-6 p-6 relative z-10">
+              <div class="space-y-4">
+                <div class="rounded-lg border border-red-500/20 bg-red-500/[0.06] p-4">
+                  <div class="flex items-start justify-between gap-3">
+                    <div>
+                      <div class="text-sm font-bold text-white">Riverbend Cafe</div>
+                      <div class="mt-1 text-xs text-red-300">Customer asked for a discount outside policy</div>
+                    </div>
+                    <span class="badge-danger">Needs approval</span>
                   </div>
-                  <div class="text-white font-bold text-sm mb-1">Data Ingestion</div>
-                  <div class="text-xs text-slate-500 font-mono">ScraperBot</div>
+                  <p class="mt-4 text-sm leading-6 text-slate-300">Pontis drafted a reply that explains the standard package and offers a manager-reviewed option.</p>
                 </div>
-
-                <div class="flex-grow h-0.5 bg-gradient-to-r from-primary-indigo to-accent-emerald relative min-w-[60px]">
-                  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-accent-emerald rounded-full shadow-md shadow-accent-emerald/50"></div>
-                </div>
-
-                <div class="flow-node border-accent-emerald glow-emerald flex-shrink-0 w-52">
-                  <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-accent-emerald/20 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-accent-emerald-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <div class="rounded-lg border border-white/[0.08] bg-white/[0.035] p-4">
+                  <div class="flex items-start justify-between gap-3">
+                    <div>
+                      <div class="text-sm font-bold text-white">Northstar Dental</div>
+                      <div class="mt-1 text-xs text-slate-500">Estimate reminder</div>
+                    </div>
+                    <span class="badge-success">Ready</span>
                   </div>
-                  <div class="text-white font-bold text-sm mb-1">Validation</div>
-                  <div class="text-xs text-slate-500 font-mono">LLM_Validator</div>
+                  <p class="mt-4 text-sm leading-6 text-slate-400">Friendly nudge prepared with a booking link and no sensitive terms.</p>
                 </div>
-
-                <div class="flex-grow h-0.5 bg-white/10 border-dashed border-t border-white/20 relative min-w-[60px]">
-                  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white/30 rounded-full"></div>
-                </div>
-
-                <div class="flow-node border-white/20 border-dashed opacity-60 flex-shrink-0 w-52">
-                  <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-white/[0.06] flex items-center justify-center">
-                    <svg class="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                <div class="rounded-lg border border-white/[0.08] bg-white/[0.035] p-4">
+                  <div class="flex items-start justify-between gap-3">
+                    <div>
+                      <div class="text-sm font-bold text-white">Atlas Fitness</div>
+                      <div class="mt-1 text-xs text-slate-500">Renewal check-in</div>
+                    </div>
+                    <span class="badge-neutral">Tomorrow</span>
                   </div>
-                  <div class="text-white font-bold text-sm mb-1">ERP Sync</div>
-                  <div class="text-xs text-slate-500 font-mono">NetSuite_Uploader</div>
+                  <p class="mt-4 text-sm leading-6 text-slate-400">Queued until the customer’s current plan reaches the renewal window.</p>
                 </div>
-
+              </div>
+              <div class="rounded-lg border border-white/[0.08] bg-[#101722] p-5">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="text-xs font-semibold uppercase tracking-wider text-primary-indigo-light">Draft message</div>
+                    <h3 class="mt-1 text-xl font-bold text-white">Approve before sending</h3>
+                  </div>
+                  <span id="approval-state" class="badge-danger">Waiting</span>
+                </div>
+                <div id="draft-message" class="mt-5 rounded-lg border border-white/[0.08] bg-white/[0.04] p-5 text-sm leading-6 text-slate-200">
+                  Hi Elena, thanks for asking about options for the catering package. The standard proposal already includes setup, delivery, and the full service window. I can ask our manager to review a special option for your weekday event, and I will follow up with a clear answer today.
+                </div>
+                <div class="mt-5 grid grid-cols-2 gap-3">
+                  <button id="approve-message" class="enterprise-button-primary">Approve send</button>
+                  <button id="revise-message" class="enterprise-button-secondary">Make warmer</button>
+                </div>
+                <div class="mt-5 rounded-md border border-accent-emerald/20 bg-accent-emerald/10 p-4">
+                  <div class="text-xs font-semibold uppercase tracking-wider text-accent-emerald-light">Pontis will do next</div>
+                  <p id="next-action" class="mt-2 text-sm leading-6 text-slate-300">Send the message, update the customer record, and remind the owner tomorrow if there is no reply.</p>
+                </div>
               </div>
             </div>
           </div>
