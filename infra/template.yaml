@@ -1,0 +1,329 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Pontis Instagram conversation management backend.
+
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    Architectures:
+      - arm64
+    Timeout: 30
+    MemorySize: 256
+    Environment:
+      Variables:
+        ACCOUNTS_TABLE: !Ref AccountsTable
+        CONVERSATIONS_TABLE: !Ref ConversationsTable
+        MESSAGES_TABLE: !Ref MessagesTable
+        DRAFTS_TABLE: !Ref DraftsTable
+        MESSAGE_QUEUE_URL: !Ref InboundMessageQueue
+        BEDROCK_MODEL_ID: !Ref BedrockModelId
+        META_APP_SECRET_ARN: !Ref MetaAppSecret
+        META_VERIFY_TOKEN_ARN: !Ref MetaVerifyToken
+        META_ACCESS_TOKEN_ARN: !Ref MetaAccessToken
+
+Parameters:
+  StageName:
+    Type: String
+    Default: dev
+  BedrockModelId:
+    Type: String
+    Default: anthropic.claude-3-5-sonnet-20240620-v1:0
+
+Resources:
+  WebhookApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: !Ref StageName
+      CorsConfiguration:
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        AllowOrigins:
+          - '*'
+        AllowHeaders:
+          - content-type
+          - x-hub-signature-256
+
+  MetaWebhookFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../services/webhook/
+      Handler: index.handler
+      Policies:
+        - SQSSendMessagePolicy:
+            QueueName: !GetAtt InboundMessageQueue.QueueName
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: !Ref MetaVerifyToken
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: !Ref MetaAppSecret
+      Events:
+        VerifyWebhook:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref WebhookApi
+            Path: /webhooks/meta
+            Method: GET
+        ReceiveWebhook:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref WebhookApi
+            Path: /webhooks/meta
+            Method: POST
+
+  MessageProcessorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../services/processor/
+      Handler: index.handler
+      Timeout: 90
+      MemorySize: 512
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref AccountsTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ConversationsTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref MessagesTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref DraftsTable
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: !Ref MetaAccessToken
+        - Statement:
+            Effect: Allow
+            Action:
+              - bedrock:InvokeModel
+              - bedrock:InvokeModelWithResponseStream
+            Resource: '*'
+      Events:
+        InboundMessages:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt InboundMessageQueue.Arn
+            BatchSize: 5
+            MaximumBatchingWindowInSeconds: 5
+
+  InboundMessageQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      VisibilityTimeout: 180
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt InboundMessageDeadLetterQueue.Arn
+        maxReceiveCount: 3
+
+  InboundMessageDeadLetterQueue:
+    Type: AWS::SQS::Queue
+
+  AccountsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: tenantId
+          AttributeType: S
+        - AttributeName: accountId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: tenantId
+          KeyType: HASH
+        - AttributeName: accountId
+          KeyType: RANGE
+      SSESpecification:
+        SSEEnabled: true
+
+  ConversationsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: tenantId
+          AttributeType: S
+        - AttributeName: conversationId
+          AttributeType: S
+        - AttributeName: updatedAt
+          AttributeType: S
+      KeySchema:
+        - AttributeName: tenantId
+          KeyType: HASH
+        - AttributeName: conversationId
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: byUpdatedAt
+          KeySchema:
+            - AttributeName: tenantId
+              KeyType: HASH
+            - AttributeName: updatedAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+      SSESpecification:
+        SSEEnabled: true
+
+  MessagesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: conversationId
+          AttributeType: S
+        - AttributeName: messageId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: conversationId
+          KeyType: HASH
+        - AttributeName: messageId
+          KeyType: RANGE
+      SSESpecification:
+        SSEEnabled: true
+
+  DraftsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: conversationId
+          AttributeType: S
+        - AttributeName: draftId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: conversationId
+          KeyType: HASH
+        - AttributeName: draftId
+          KeyType: RANGE
+      SSESpecification:
+        SSEEnabled: true
+
+  MetaAppSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Meta app secret for webhook signature verification.
+
+  MetaVerifyToken:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Meta webhook verification token.
+
+  MetaAccessToken:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Meta access token for Instagram Messaging API calls.
+
+  PontisGraphQlApi:
+    Type: AWS::AppSync::GraphQLApi
+    Properties:
+      Name: !Sub 'pontis-${StageName}'
+      AuthenticationType: API_KEY
+      XrayEnabled: true
+
+  PontisGraphQlApiKey:
+    Type: AWS::AppSync::ApiKey
+    Properties:
+      ApiId: !GetAtt PontisGraphQlApi.ApiId
+
+  PontisGraphQlSchema:
+    Type: AWS::AppSync::GraphQLSchema
+    Properties:
+      ApiId: !GetAtt PontisGraphQlApi.ApiId
+      Definition: |
+        schema {
+          query: Query
+          mutation: Mutation
+          subscription: Subscription
+        }
+
+        type Query {
+          conversations(accountId: ID!, limit: Int = 30): [Conversation!]!
+          conversation(conversationId: ID!): Conversation
+        }
+
+        type Mutation {
+          updateDraft(conversationId: ID!, draftId: ID!, body: String!): Draft!
+          sendDraft(conversationId: ID!, draftId: ID!): Message!
+          markConversation(conversationId: ID!, status: ConversationStatus!): Conversation!
+        }
+
+        type Subscription {
+          onMessageReceived(accountId: ID!): MessageEvent!
+          onDraftGenerated(conversationId: ID!): Draft!
+        }
+
+        type Conversation {
+          tenantId: ID!
+          accountId: ID!
+          conversationId: ID!
+          instagramThreadId: String!
+          participant: Participant!
+          status: ConversationStatus!
+          summary: String
+          historyCompleteness: HistoryCompleteness!
+          oldestAvailableMessageAt: AWSDateTime
+          updatedAt: AWSDateTime!
+          messages(limit: Int = 50, before: AWSDateTime): [Message!]!
+          latestDraft: Draft
+        }
+
+        type Participant {
+          instagramScopedId: String!
+          handle: String
+          displayName: String
+          profilePictureUrl: AWSURL
+        }
+
+        type Message {
+          conversationId: ID!
+          messageId: ID!
+          direction: MessageDirection!
+          body: String!
+          sentAt: AWSDateTime!
+          source: MessageSource!
+        }
+
+        type Draft {
+          conversationId: ID!
+          draftId: ID!
+          body: String!
+          confidence: Float!
+          missingContext: [String!]!
+          summaryUpdate: String
+          generatedAt: AWSDateTime!
+          editedBody: String
+        }
+
+        type MessageEvent {
+          accountId: ID!
+          conversationId: ID!
+          message: Message!
+        }
+
+        enum ConversationStatus {
+          NEEDS_REPLY
+          WAITING
+          RESOLVED
+          NEEDS_HUMAN
+        }
+
+        enum HistoryCompleteness {
+          FULL_FROM_CONNECTION
+          PARTIAL_BACKFILL
+          UNKNOWN
+        }
+
+        enum MessageDirection {
+          INBOUND
+          OUTBOUND
+        }
+
+        enum MessageSource {
+          INSTAGRAM_WEBHOOK
+          INSTAGRAM_BACKFILL
+          PONTIS_USER
+        }
+
+Outputs:
+  WebhookUrl:
+    Description: Meta webhook callback URL.
+    Value: !Sub 'https://${WebhookApi}.execute-api.${AWS::Region}.amazonaws.com/${StageName}/webhooks/meta'
+  InboundQueueUrl:
+    Value: !Ref InboundMessageQueue
+  GraphQlUrl:
+    Value: !GetAtt PontisGraphQlApi.GraphQLUrl

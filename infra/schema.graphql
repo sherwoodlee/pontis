@@ -1,0 +1,93 @@
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Query {
+  conversations(accountId: ID!, limit: Int = 30): [Conversation!]!
+  conversation(conversationId: ID!): Conversation
+}
+
+type Mutation {
+  updateDraft(conversationId: ID!, draftId: ID!, body: String!): Draft!
+  sendDraft(conversationId: ID!, draftId: ID!): Message!
+  markConversation(conversationId: ID!, status: ConversationStatus!): Conversation!
+}
+
+type Subscription {
+  onMessageReceived(accountId: ID!): MessageEvent!
+  onDraftGenerated(conversationId: ID!): Draft!
+}
+
+type Conversation {
+  tenantId: ID!
+  accountId: ID!
+  conversationId: ID!
+  instagramThreadId: String!
+  participant: Participant!
+  status: ConversationStatus!
+  summary: String
+  historyCompleteness: HistoryCompleteness!
+  oldestAvailableMessageAt: AWSDateTime
+  updatedAt: AWSDateTime!
+  messages(limit: Int = 50, before: AWSDateTime): [Message!]!
+  latestDraft: Draft
+}
+
+type Participant {
+  instagramScopedId: String!
+  handle: String
+  displayName: String
+  profilePictureUrl: AWSURL
+}
+
+type Message {
+  conversationId: ID!
+  messageId: ID!
+  direction: MessageDirection!
+  body: String!
+  sentAt: AWSDateTime!
+  source: MessageSource!
+}
+
+type Draft {
+  conversationId: ID!
+  draftId: ID!
+  body: String!
+  confidence: Float!
+  missingContext: [String!]!
+  summaryUpdate: String
+  generatedAt: AWSDateTime!
+  editedBody: String
+}
+
+type MessageEvent {
+  accountId: ID!
+  conversationId: ID!
+  message: Message!
+}
+
+enum ConversationStatus {
+  NEEDS_REPLY
+  WAITING
+  RESOLVED
+  NEEDS_HUMAN
+}
+
+enum HistoryCompleteness {
+  FULL_FROM_CONNECTION
+  PARTIAL_BACKFILL
+  UNKNOWN
+}
+
+enum MessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum MessageSource {
+  INSTAGRAM_WEBHOOK
+  INSTAGRAM_BACKFILL
+  PONTIS_USER
+}
